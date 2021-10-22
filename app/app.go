@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/estromenko/binchbank/internal/clients"
 	"github.com/gofiber/fiber/v2"
+	"github.com/volatiletech/sqlboiler/v4/boil"
 
 	_ "github.com/lib/pq"
 )
@@ -24,11 +26,15 @@ func Run() error {
 		return err
 	}
 
+	boil.SetDB(db)
+
 	if err := db.Ping(); err != nil {
 		return err
 	}
 
 	app := fiber.New()
+
+	app.Mount("/clients", clients.New())
 
 	return app.Listen(":8888")
 }
