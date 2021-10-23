@@ -25,8 +25,9 @@ type Client struct {
 }
 
 type Branch struct {
-	ID     uint `gorm:"primaryKey" json:"id"`
-	Rating uint `json:"rating"`
+	ID          uint   `gorm:"primaryKey" json:"id"`
+	Rating      uint   `json:"rating"`
+	ManagerName string `json:"manager_name"`
 }
 
 type Employee struct {

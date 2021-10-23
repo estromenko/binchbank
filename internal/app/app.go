@@ -3,6 +3,7 @@ package app
 import (
 	"os"
 
+	"github.com/estromenko/binchbank/internal/controllers"
 	"github.com/estromenko/binchbank/internal/models"
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/driver/postgres"
@@ -23,6 +24,8 @@ func Run() error {
 	}
 
 	app := fiber.New()
+
+	app.Mount("/clients", controllers.NewClientController(db))
 
 	return app.Listen(":8888")
 }
