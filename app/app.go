@@ -1,7 +1,6 @@
 package app
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -10,15 +9,7 @@ import (
 )
 
 func Run() error {
-	dsn := fmt.Sprintf("user=%s password=%s host=%s port=%s dbname=%s sslmode=disable",
-		os.Getenv("PG_USER"),
-		os.Getenv("PG_PASSWORD"),
-		os.Getenv("PG_HOST"),
-		os.Getenv("PG_PORT"),
-		os.Getenv("PG_NAME"),
-	)
-
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+	db, err := gorm.Open(postgres.Open(os.Getenv("PG_DSN")), &gorm.Config{
 		SkipDefaultTransaction: true,
 		PrepareStmt:            true,
 	})
