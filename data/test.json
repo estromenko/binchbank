@@ -1,12 +1,19 @@
 [
     {
+<<<<<<< Updated upstream
 <<<<<<< HEAD
         "id": 1
+=======
+        "id": 1,
+        "username": "testuser"
+>>>>>>> Stashed changes
     },
     {
-        "id": 12
+        "id": 12,
+        "username": "testuser"
     },
     {
+<<<<<<< Updated upstream
         "id": 15
 =======
         "id": 1,
@@ -20,5 +27,9 @@
         "id": 15,
         "username": "testuser"
 >>>>>>> 03b2f2fd2bc76b58d6ae3aea5c3694b959a8bac3
+=======
+        "id": 15,
+        "username": "testuser"
+>>>>>>> Stashed changes
     }
 ]
