@@ -4,7 +4,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/estromenko/binchbank/app"
+	"github.com/estromenko/binchbank/internal/app"
 	"github.com/joho/godotenv"
 )
 

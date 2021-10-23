@@ -3,6 +3,7 @@ package app
 import (
 	"os"
 
+	"github.com/estromenko/binchbank/internal/models"
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -17,7 +18,9 @@ func Run() error {
 		return err
 	}
 
-	_ = db
+	if err := models.Migrate(db); err != nil {
+		return err
+	}
 
 	app := fiber.New()
 
