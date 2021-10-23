@@ -48,7 +48,12 @@ func parseCSV(file *os.File) ([]Operation, error) {
 		}
 
 		operation := Operation{
+<<<<<<< HEAD
 			ID: uint(id),
+=======
+			ID:       uint(id),
+			Username: line["username"].(string),
+>>>>>>> 03b2f2fd2bc76b58d6ae3aea5c3694b959a8bac3
 		}
 
 		operations = append(operations, operation)

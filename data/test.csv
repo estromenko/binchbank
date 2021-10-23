@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 id
 1
 12
 15
+=======
+id,username
+1,testuser
+12,testuser
+15,testuser
+>>>>>>> 03b2f2fd2bc76b58d6ae3aea5c3694b959a8bac3
