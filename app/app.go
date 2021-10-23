@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/estromenko/binchbank/internal/clients"
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -27,8 +26,9 @@ func Run() error {
 		return err
 	}
 
+	_ = db
+
 	app := fiber.New()
-	app.Mount("/clients", clients.New(db))
 
 	return app.Listen(":8888")
 }
