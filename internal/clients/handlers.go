@@ -1,21 +1,29 @@
 package clients
 
 import (
-	"context"
-	"encoding/json"
-
-	"github.com/estromenko/binchbank/models"
 	"github.com/gofiber/fiber/v2"
-	"github.com/volatiletech/sqlboiler/v4/boil"
+	"gorm.io/gorm"
 )
 
-func Index(c *fiber.Ctx) error {
-	clients, err := models.Clients().All(context.Background(), boil.GetContextDB())
-	if err != nil {
-		return c.Status(400).JSON(map[string]interface{}{
-			"error": err.Error(),
-		})
-	}
+type clientsController struct {
+	db *gorm.DB
+}
 
-	return json.NewEncoder(c.Response().BodyWriter()).Encode(clients)
+func (c *clientsController) All() fiber.Handler {
+	return func(ctx *fiber.Ctx) error {
+		var clients []*Client
+		c.db.Find(&clients)
+		return ctx.JSON(clients)
+	}
+}
+
+func (c *clientsController) Operations() fiber.Handler {
+	return func(ctx *fiber.Ctx) error {
+		id := ctx.Params("id")
+
+		var operations []*Operation
+
+		c.db.Find(&operations, "client_id=?", id)
+		return ctx.JSON(operations)
+	}
 }

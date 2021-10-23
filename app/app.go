@@ -1,15 +1,13 @@
 package app
 
 import (
-	"database/sql"
 	"fmt"
 	"os"
 
 	"github.com/estromenko/binchbank/internal/clients"
 	"github.com/gofiber/fiber/v2"
-	"github.com/volatiletech/sqlboiler/v4/boil"
-
-	_ "github.com/lib/pq"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 func Run() error {
@@ -21,20 +19,16 @@ func Run() error {
 		os.Getenv("PG_NAME"),
 	)
 
-	db, err := sql.Open("postgres", dsn)
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+		SkipDefaultTransaction: true,
+		PrepareStmt:            true,
+	})
 	if err != nil {
 		return err
 	}
 
-	boil.SetDB(db)
-
-	if err := db.Ping(); err != nil {
-		return err
-	}
-
 	app := fiber.New()
-
-	app.Mount("/clients", clients.New())
+	app.Mount("/clients", clients.New(db))
 
 	return app.Listen(":8888")
 }
