@@ -47,9 +47,10 @@ type Role struct {
 }
 
 type Manager struct {
-	ID    uint   `gorm:"primaryKey" json:"id"`
-	Email string `json:"email"`
-	IsTop bool   `json:"is_top"`
+	ID       uint   `gorm:"primaryKey" json:"id"`
+	Email    string `json:"email"`
+	IsTop    bool   `json:"is_top"`
+	Password string `json:"password"`
 }
 
 func Migrate(db *gorm.DB) error {
